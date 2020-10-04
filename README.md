@@ -1,0 +1,9 @@
+# Finding a Convex Hull
+
+I was reading the Wikipedia page for [Convex hull algorithms](https://en.wikipedia.org/wiki/Convex_hull_algorithms) and felt very scared so I tried to come up with one without reading any of the algorithms. In the shower the next morning I thought of an algorithm that feels a lot like gift wrapping.
+
+You start at a point on the hull (I chose the leftmost point) and sweep a line, starting at the point and rotating to the right, until you hit a point. You then move to that point and continue sweeping until you return back to your starting position.
+
+Because this is animated I calculate on each frame whether the line intersects a point, and if it does I add it to the hull. You could do this in O(mn) where m is the number of points in the hull and n is the total number of points on the plane by calculating a minimal change in theta between the line and every other point. This is the same as sweeping across the plane. If you chose the first point a sweeping line intersects, you are necessarily choosing the point that has a minimal difference in theta from the initial angle of the line. 
+
+I thought of a neat trick to calculate if a line intersects a point. If you take a vector that points from the current point to any other point, and find its angle, it will be exactly the same as the angle of the line if the point and the sweeping line intersect. If you think of the sweeping line as this vector then that becomes pretty clear, because they are the same vector. So to find if a line intersects some point you just iterate over all the points, find the atan2 between each point and the current point, and compare that to the angle of the line. If they are the same, add that point to the hull, and keep sweeping from that new point.
