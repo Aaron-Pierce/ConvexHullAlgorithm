@@ -56,8 +56,8 @@ function draw() {
         ellipse(...p, 15)
     }
     //for some reason p5 will run the simulation
-    //before everything loads so it will seem
-    //like it started with 3 points already in the hull
+    //before everything loads so it will seem sometimes
+    //like it started with some points in the hull already
     if (frameCount < 30) return; 
 
     //draw a special dot for the current point
@@ -75,7 +75,7 @@ function draw() {
         line(...currPoint, currPoint[0] + 2000 * lVec[0], currPoint[1] - 2000 * lVec[1]);
         pop();
 
-        //atan is bounded by +=2pi but we let theta go as low as it wants,
+        //atan is bounded by +/- 2pi but we let theta go as low as it wants,
         //so we need to wrap theta around
         let cleanTheta = theta % (2 * 3.14);
 
